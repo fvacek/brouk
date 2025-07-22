@@ -1,2 +1,2 @@
 # brouk
-Embedding shvbroker to cusdtom application prove of concept
+Embedding shvbroker to cusdtom application proof of concept
