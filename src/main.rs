@@ -6,7 +6,7 @@ use shvrpc::util::parse_log_verbosity;
 use clap::{Args, Command, FromArgMatches, Parser};
 use futures::{select, FutureExt};
 
-use shvbroker::{brokerimpl::{next_peer_id, BrokerCommand, BrokerImpl, BrokerToPeerMessage, PeerKind}, config::{AccessConfig, AccessRule, BrokerConfig, Mount, Password, Role, SharedBrokerConfig, User}, shvnode::{self, PUBLIC_DIR_LS_METHODS}, spawn::spawn_and_log_error};
+use shvbroker::{brokerimpl::{next_peer_id, BrokerCommand, BrokerImpl, BrokerToPeerMessage, PeerKind}, config::{AccessConfig, AccessRule, BrokerConfig, Mount, Role, SharedBrokerConfig}, shvnode::{self, PUBLIC_DIR_LS_METHODS}, spawn::spawn_and_log_error};
 use smol::channel::{self, Sender};
 
 #[derive(Parser, Debug)]
@@ -83,7 +83,6 @@ pub(crate) fn main() -> shvrpc::Result<()> {
         info!("Using default config");
         let mut config = BrokerConfig::default();
         config.access.mounts.insert("brouk".to_string(), Mount{ mount_point: "brouk".to_string(), description: "".to_string() });
-        config.access.users.insert("brouk".to_string(), User{ password: Password::Plain("brouk".to_string()), roles: vec!["brouk".to_string()] });
         config.access.roles.insert("brouk".to_string(), Role{ roles: vec![], access: vec![AccessRule{ shv_ri: "brouk/**:*".to_string(), grant: "su".to_string()}, AccessRule{ shv_ri: "brouk/**:*:*".to_string(), grant: "su".to_string()}] });
         config
     };
