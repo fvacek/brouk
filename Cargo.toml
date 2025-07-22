@@ -1,0 +1,32 @@
+[package]
+name = "brouk"
+version = "0.1.0"
+edition = "2024"
+
+[profile.release]
+panic = "abort"
+[profile.dev]
+panic = "abort"
+
+[dependencies]
+shvproto = { git = "https://github.com/silicon-heaven/libshvproto-rs.git", branch = "master" }
+shvrpc = { git = "https://github.com/silicon-heaven/libshvrpc-rs.git", branch = "master", features = ["websocket"] }
+shvbroker = { git = "https://github.com/silicon-heaven/shvbroker-rs.git", branch = "master" }
+
+log = "0.4.21"
+simple_logger = { version = "5.0.0", features = ["stderr"] }
+clap = { version = "4.4.12", features = ["derive"] }
+smol = "2"
+serde_yaml = "0.9"
+futures = "0.3.30"
+
+
+# For local development
+[patch."https://github.com/silicon-heaven/libshvproto-rs"]
+shvproto = { path = "../libshvproto-rs" }
+[patch."https://github.com/silicon-heaven/libshvrpc-rs"]
+shvrpc = { path = "../libshvrpc-rs" }
+[patch."https://github.com/silicon-heaven/shvbroker-rs"]
+shvbroker = { path = "../shvbroker-rs" }
+[patch.crates-io]
+simple_logger = { git = "https://github.com/fvacek/rust-simple_logger.git", branch = "main" }
